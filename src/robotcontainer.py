@@ -5,12 +5,24 @@
 #
 
 import commands2
-import commands2.button
-import commands2.cmd
+
+import commands2.button, commands2.cmd
+import numpy as np
 from commands2.sysid import SysIdRoutine
 
+from constants import ClimbConstants
 from generated.tuner_constants import TunerConstants
+from constants import RobotDimensions, ElevatorConstants
+from subsystems import (
+    ElevatorSubsystem,
+    coralSubsystem,
+    limelightSubsystem,
+    pneumaticSubsystem,
+    # oneMotor,
+    ultrasonic, #ClimbSubsystem
+)
 from telemetry import Telemetry
+from robotUtils import controlAugment
 
 from phoenix6 import swerve
 from wpimath.geometry import Rotation2d
@@ -36,14 +48,20 @@ class RobotContainer:
         # Setting up bindings for necessary control of the swerve drive platform
         self._drive = (
             swerve.requests.FieldCentric()
-            .with_deadband(self._max_speed * 0.1)
+            .with_deadband(self._max_speed * 0.08)
             .with_rotational_deadband(
-                self._max_angular_rate * 0.1
-            )  # Add a 10% deadband
+                self._max_angular_rate * 0.08
+            )  # Add a 5% deadband on output
             .with_drive_request_type(
-                swerve.SwerveModule.DriveRequestType.OPEN_LOOP_VOLTAGE
-            )  # Use open-loop control for drive motors
+                swerve.SwerveModule.DriveRequestType.VELOCITY #OPEN_LOOP_VOLTAGE
+            )  # Use open-loop control for drive
         )
+        """
+        Control the drive motor using a velocity closed-loop request.
+        The control output type is determined by SwerveModuleConstants.DriveMotorClosedLoopOutput
+        """
+
+
         self._brake = swerve.requests.SwerveDriveBrake()
         self._point = swerve.requests.PointWheelsAt()
 
