@@ -1,3 +1,8 @@
+#CTRE recorded telemetry 
+*.hoot
+ctre_sim/*
+FieldVideos_toCalibrate/*.MOV
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -167,5 +172,12 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# Ruff stuff:
+.ruff_cache/
+
 # PyPI configuration file
 .pypirc
+#needed to clean out index by running this: git rm -r --cached ctre_sim/
+ctre_sim/
+
+
