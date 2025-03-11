@@ -12,6 +12,7 @@ class CoralCommand(commands2.Command):
         elevator: ElevatorSubsystem.ElevatorSubsystem,
         timer: wpilib.Timer,
     ):
+        crash_in_command = 1/0
         super().__init__()
         self.coral_track = coralTrack
         self.pneumatic_hub = pneumaticHub

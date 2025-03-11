@@ -199,8 +199,9 @@ class CAN_Address(IntEnum):
     THIRTYSEVEN = auto()
     THIRTYEIGHT = auto()
     THIRTYNINE = auto()
-    # Algae group
+    #pneumatics
     FORTY = auto()
+    # Algae group
     FORTYONE = auto()
     FORTYTWO = auto()
     FORTYTHREE = auto()
@@ -277,9 +278,9 @@ class RobotDimensions:
 
 
 class CoralConstants:
-    kCoralMotorPort = CAN_Address.SEVENTEEN
-    kLeftBreakerLight = 8  # TODO: Get the actual IDs
-    kRightBreakerLight = 9
+    kCoralMotorPort = CAN_Address.TWENTYNINE #THIRTY
+    kLeftBreakerLight = Rio_DIO.ZERO  # TODO: Get the actual IDs
+    kRightBreakerLight = Rio_DIO.ONE
 
 class ClimbConstants:
     kClimbMotorPort = CAN_Address.TWENTYSEVEN
@@ -311,13 +312,16 @@ class ClimbConstants:
             )
 
 class PneumaticConstants:
-    kHub = 40
+    kHub = CAN_Address.FORTY
+
+class PowerDistributionConstants:
+    kPDP = CAN_Address.FIFTY
 
 class UltrasonicConstants:
-    frontLeft = Rio_DIO.ZERO
-    frontRight = Rio_DIO.ONE
-    backLeft = Rio_DIO.TWO
-    backRight = Rio_DIO.THREE
+    frontLeft = Rio_DIO.TWO
+    frontRight = Rio_DIO.THREE
+    # backLeft = Rio_DIO.FOUR
+    # backRight = Rio_DIO.THREE
 
 from pathlib import Path
 class LimelightConstants:
